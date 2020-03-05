@@ -9,21 +9,28 @@
 /* Begin PBXBuildFile section */
 		46318AA724106F1400F45C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46318AA624106F1400F45C25 /* AppDelegate.swift */; };
 		46318AA924106F1400F45C25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46318AA824106F1400F45C25 /* SceneDelegate.swift */; };
-		46318AAB24106F1400F45C25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46318AAA24106F1400F45C25 /* ViewController.swift */; };
 		46318AAE24106F1400F45C25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46318AAC24106F1400F45C25 /* Main.storyboard */; };
 		46318AB024106F1500F45C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46318AAF24106F1500F45C25 /* Assets.xcassets */; };
 		46318AB324106F1500F45C25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46318AB124106F1500F45C25 /* LaunchScreen.storyboard */; };
+		46318ABD24106F3E00F45C25 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46318ABC24106F3E00F45C25 /* CloudKit.framework */; };
+		46318ABF2410762E00F45C25 /* DeviceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46318ABE2410762E00F45C25 /* DeviceCollectionViewController.swift */; };
+		4651D30824113D30008D67ED /* DeviceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4651D30724113D30008D67ED /* DeviceCollectionViewCell.swift */; };
+		4651D30A24113FE9008D67ED /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4651D30924113FE9008D67ED /* Device.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		46318AA324106F1400F45C25 /* Devices View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Devices View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46318AA624106F1400F45C25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46318AA824106F1400F45C25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		46318AAA24106F1400F45C25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		46318AAD24106F1400F45C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46318AAF24106F1500F45C25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46318AB224106F1500F45C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46318AB424106F1500F45C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46318ABA24106F3900F45C25 /* Devices View.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Devices View.entitlements"; sourceTree = "<group>"; };
+		46318ABC24106F3E00F45C25 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		46318ABE2410762E00F45C25 /* DeviceCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewController.swift; sourceTree = "<group>"; };
+		4651D30724113D30008D67ED /* DeviceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewCell.swift; sourceTree = "<group>"; };
+		4651D30924113FE9008D67ED /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46318ABD24106F3E00F45C25 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +50,7 @@
 			children = (
 				46318AA524106F1400F45C25 /* Devices View */,
 				46318AA424106F1400F45C25 /* Products */,
+				46318ABB24106F3E00F45C25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +65,26 @@
 		46318AA524106F1400F45C25 /* Devices View */ = {
 			isa = PBXGroup;
 			children = (
+				46318AAC24106F1400F45C25 /* Main.storyboard */,
+				46318ABE2410762E00F45C25 /* DeviceCollectionViewController.swift */,
+				4651D30724113D30008D67ED /* DeviceCollectionViewCell.swift */,
+				4651D30924113FE9008D67ED /* Device.swift */,
 				46318AA624106F1400F45C25 /* AppDelegate.swift */,
 				46318AA824106F1400F45C25 /* SceneDelegate.swift */,
-				46318AAA24106F1400F45C25 /* ViewController.swift */,
-				46318AAC24106F1400F45C25 /* Main.storyboard */,
 				46318AAF24106F1500F45C25 /* Assets.xcassets */,
 				46318AB124106F1500F45C25 /* LaunchScreen.storyboard */,
 				46318AB424106F1500F45C25 /* Info.plist */,
+				46318ABA24106F3900F45C25 /* Devices View.entitlements */,
 			);
 			path = "Devices View";
+			sourceTree = "<group>";
+		};
+		46318ABB24106F3E00F45C25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46318ABC24106F3E00F45C25 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +158,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46318AAB24106F1400F45C25 /* ViewController.swift in Sources */,
+				4651D30824113D30008D67ED /* DeviceCollectionViewCell.swift in Sources */,
 				46318AA724106F1400F45C25 /* AppDelegate.swift in Sources */,
+				46318ABF2410762E00F45C25 /* DeviceCollectionViewController.swift in Sources */,
 				46318AA924106F1400F45C25 /* SceneDelegate.swift in Sources */,
+				4651D30A24113FE9008D67ED /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Devices View/Devices View.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MZ552MTEJZ;
 				INFOPLIST_FILE = "Devices View/Info.plist";
@@ -302,6 +325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Devices View/Devices View.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MZ552MTEJZ;
 				INFOPLIST_FILE = "Devices View/Info.plist";
