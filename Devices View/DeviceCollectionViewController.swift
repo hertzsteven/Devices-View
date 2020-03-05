@@ -57,9 +57,7 @@ class DeviceCollectionViewController: UICollectionViewController {
                 let theappref = iPadRecord["appID"] as! CKRecord.Reference
                 let theApprefid = theappref.recordID
                 
-                
-                /// get the app icon
-                 var appIcon: UIImage = UIImage()
+                var appIcon: UIImage = UIImage()
 
                 
                 self.dbs.fetch(withRecordID: theApprefid) { (appRecord, appError) in
@@ -68,37 +66,45 @@ class DeviceCollectionViewController: UICollectionViewController {
                     
                     
                     if let asset = appRecord["icon"] as? CKAsset {
+                        print("in if let asset")
                         if let imageData: NSData = NSData(contentsOf: asset.fileURL!) {
+                            print("in if let asset image")
                             appIcon = UIImage(data: imageData as Data)!
+                            print(appIcon)
                         }
                     }
+                    
+                    /// get the student
+                    let theStudentref = iPadRecord["studentID"] as! CKRecord.Reference
+                    let theStudentrefid = theStudentref.recordID
+                    
+                    var studentImage: UIImage = UIImage()
+                    
+                    
+                    self.dbs.fetch(withRecordID: theStudentrefid) { (studentRecord, studentError) in
+                        guard let studentRecord = studentRecord, studentError == nil else { fatalError("Student Not found") }
+                        print(studentRecord["lastName"] as Any)
+                        
+                        /// get the student pic
+                        
+                        if let asset = studentRecord["photo"] as? CKAsset {
+                            if let imageData: NSData = NSData(contentsOf: asset.fileURL!) {
+                                studentImage = UIImage(data: imageData as Data)!
+                            }
+                        }
+                    
+                        self.devices.append(Device(name: studentRecord["lastName"]!, studentImage: studentImage, appIcon: appIcon))
+                        self.devices.append(Device(name: studentRecord["lastName"]!, studentImage: studentImage, appIcon: appIcon))
+                        
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                    
+                    
                 }
                 
-                /// get the student
-                let theStudentref = iPadRecord["studentID"] as! CKRecord.Reference
-                let theStudentrefid = theStudentref.recordID
 
-                var studentImage: UIImage = UIImage()
-
-                self.dbs.fetch(withRecordID: theStudentrefid) { (studentRecord, studentError) in
-                     guard let studentRecord = studentRecord, studentError == nil else { fatalError("Student Not found") }
-                     print(studentRecord["lastName"] as Any)
-                     
-                     /// get the student pic
-                     
-                     if let asset = studentRecord["photo"] as? CKAsset {
-                         if let imageData: NSData = NSData(contentsOf: asset.fileURL!) {
-                             studentImage = UIImage(data: imageData as Data)!
-                         }
-                     }
-
-                self.devices.append(Device(name: studentRecord["lastName"]!, studentImage: studentImage, appIcon: appIcon))
-                self.devices.append(Device(name: studentRecord["lastName"]!, studentImage: studentImage, appIcon: appIcon))
-
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
         }
     }
     }

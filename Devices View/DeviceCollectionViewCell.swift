@@ -63,8 +63,14 @@ class DeviceCollectionViewCell: UICollectionViewCell {
 //    }
     
     func setup(device: Device) {
+        print("start setup")
        deviceName.text =  device.name
-        studentPhotoView.image = device.studentImage
+        print(device.appIcon)
+        print(device.studentImage)
+        studentPhotoView.image = device.appIcon
+        appIconView.image = device.studentImage
+        print("end setup")
+        
      }
 
     
