@@ -11,19 +11,40 @@ import CloudKit
 
 private let reuseIdentifier = "Cell"
 
+private let refreshControl = UIRefreshControl()
+
 class DeviceCollectionViewController: UICollectionViewController {
 
+    /// for cloudkit
     var dbs = CKContainer(identifier: "iCloud.com.dia.cloudKitExample.open").publicCloudDatabase
     
     var devices =  Array<Device>()
+       
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// Create NSPredicate
+        //collectionView.
+      
+        // Configure Refresh Control
+        doRefreshContol()
+        
+        // Load devices
+        loadiPadData()
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+    }
+
+    fileprivate func loadiPadData() {
+
+        // housekeeping for the refresh
+        refreshControl.endRefreshing()
+        devices.removeAll()
+        
         let predicate = NSPredicate(format: "teacherGroup = %@", "29")
         
-        //      let query = CKQuery(recordType: "iPad", predicate: NSPredicate(format: "TRUEPREDICATE"))
+        // let query = CKQuery(recordType: "iPad", predicate: NSPredicate(format: "TRUEPREDICATE"))
         let query = CKQuery(recordType: "iPad", predicate: predicate)
         
         dbs.perform(query, inZoneWith: nil) { (records, error) in
@@ -31,35 +52,68 @@ class DeviceCollectionViewController: UICollectionViewController {
             
             for iPadRecord in records {
                 print(iPadRecord["name"] as Any)
-                self.devices.append(Device(name: iPadRecord["name"]! ))
-                self.devices.append(Device(name: iPadRecord["name"]! ))
-            }
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+
+                /// get the app
+                let theappref = iPadRecord["appID"] as! CKRecord.Reference
+                let theApprefid = theappref.recordID
+                
+                
+                /// get the app icon
+                 var appIcon: UIImage = UIImage()
+
+                
+                self.dbs.fetch(withRecordID: theApprefid) { (appRecord, appError) in
+                    guard let appRecord = appRecord, appError == nil else { fatalError("App Not found") }
+                    print(appRecord["name"] as Any)
+                    
+                    
+                    if let asset = appRecord["icon"] as? CKAsset {
+                        if let imageData: NSData = NSData(contentsOf: asset.fileURL!) {
+                            appIcon = UIImage(data: imageData as Data)!
+                        }
+                    }
+                }
+                
+                /// get the student
+                let theStudentref = iPadRecord["studentID"] as! CKRecord.Reference
+                let theStudentrefid = theStudentref.recordID
+
+                var studentImage: UIImage = UIImage()
+
+                self.dbs.fetch(withRecordID: theStudentrefid) { (studentRecord, studentError) in
+                     guard let studentRecord = studentRecord, studentError == nil else { fatalError("Student Not found") }
+                     print(studentRecord["lastName"] as Any)
+                     
+                     /// get the student pic
+                     
+                     if let asset = studentRecord["photo"] as? CKAsset {
+                         if let imageData: NSData = NSData(contentsOf: asset.fileURL!) {
+                             studentImage = UIImage(data: imageData as Data)!
+                         }
+                     }
+
+                self.devices.append(Device(name: studentRecord["lastName"]!, studentImage: studentImage, appIcon: appIcon))
+                self.devices.append(Device(name: studentRecord["lastName"]!, studentImage: studentImage, appIcon: appIcon))
+
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             }
         }
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-       // self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+    }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    // MARK: - Side helper functions
+    fileprivate func doRefreshContol() {
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshCollection), for: .valueChanged)
     }
-    */
+    
+   @objc func refreshCollection()  {
+        loadiPadData()
+    }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -76,13 +130,16 @@ class DeviceCollectionViewController: UICollectionViewController {
         print("In cell")
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? DeviceCollectionViewCell else {fatalError("Could not cast it")}
         //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DeviceCollectionViewCell
-        //cell.setup(device: devices[indexPath.row])
+        cell.setup(device: devices[indexPath.row])
     
+       // cell.studentPhotoView.image = theImage
     
         // Configure the cell
     
         return cell
     }
+    
+    
 
     // MARK: UICollectionViewDelegate
 

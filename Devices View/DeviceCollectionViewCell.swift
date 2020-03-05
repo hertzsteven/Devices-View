@@ -10,7 +10,13 @@ import UIKit
 
 class DeviceCollectionViewCell: UICollectionViewCell {
     
-//    @IBOutlet weak var studentImageView: UIImageView!
+    @IBOutlet weak var appIconView: UIImageView!
+    
+    @IBOutlet weak var deviceName: UILabel!
+    
+    @IBOutlet weak var studentPhotoView: UIImageView!
+    
+    //    @IBOutlet weak var studentImageView: UIImageView!
 //
 //    @IBOutlet weak var studentNameLabel: UILabel!
 //
@@ -57,7 +63,8 @@ class DeviceCollectionViewCell: UICollectionViewCell {
 //    }
     
     func setup(device: Device) {
-//        deviceName.text =  device.name
+       deviceName.text =  device.name
+        studentPhotoView.image = device.studentImage
      }
 
     

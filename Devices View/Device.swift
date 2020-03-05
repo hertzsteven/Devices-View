@@ -6,8 +6,10 @@
 //  Copyright © 2020 DevelopItSolutions. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Device {
     var name: String
+    var studentImage: UIImage
+    var appIcon: UIImage
 }
