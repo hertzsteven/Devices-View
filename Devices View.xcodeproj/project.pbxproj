@@ -66,8 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				46318AAC24106F1400F45C25 /* Main.storyboard */,
-				46318ABE2410762E00F45C25 /* DeviceCollectionViewController.swift */,
-				4651D30724113D30008D67ED /* DeviceCollectionViewCell.swift */,
+				46AFF296241285CC009D5EE2 /* ViewConroller */,
 				4651D30924113FE9008D67ED /* Device.swift */,
 				46318AA624106F1400F45C25 /* AppDelegate.swift */,
 				46318AA824106F1400F45C25 /* SceneDelegate.swift */,
@@ -85,6 +84,15 @@
 				46318ABC24106F3E00F45C25 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46AFF296241285CC009D5EE2 /* ViewConroller */ = {
+			isa = PBXGroup;
+			children = (
+				46318ABE2410762E00F45C25 /* DeviceCollectionViewController.swift */,
+				4651D30724113D30008D67ED /* DeviceCollectionViewCell.swift */,
+			);
+			path = ViewConroller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
